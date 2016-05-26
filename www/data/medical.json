@@ -1,0 +1,70 @@
+[
+	{
+		"id": 2,
+		"Complaint": "I'm too old",
+		"LastModified": "2015-11-19",
+		"Content": 
+		[
+			{
+				"BP": "120/80",
+				"Temperature": "37 degrees C",
+				"Nurse": "Nurse Joy",
+				"Date": "2015-11-19",
+				"Findings": "Cute ako",
+				"Remarks": "Sabi ng nanay ko",
+				"Doctor": "Dr. Drake Ramorey",
+				"PRCNumber": "483291"
+			},
+			{
+				"Date": "2015-11-01",
+				"Findings": "Broken heart",
+				"Remarks": "Get new heart",
+				"Doctor": "Dr. Quack Quak",
+				"PRCNumber": "483291"
+			},
+			{
+				"Date": "2015-11-05",
+				"Findings": "Broken heart",
+				"Remarks": "Get new heart",
+				"Doctor": "Dr. Octopus",
+				"PRCNumber": "483291"
+			}
+		],
+		"LabResults": [
+		]
+	},
+	{
+		"id": 1,
+		"Complaint": "The government is cute",
+		"LastModified": "2015-10-30",
+		"Content": 
+		[
+			{
+				"Date": "2015-10-30",
+				"Findings": "Blinded by Pride",
+				"Remarks": "Use Ariel or Downy instead",
+				"Doctor": "Dr. Drake Ramorey",
+				"PRCNumber": "483291"
+			}
+		],
+		"LabResults": [
+		]
+	},
+	{
+		"id": 0,
+		"Complaint": "I don't have a lovelife",
+		"LastModified": "2015-10-29",
+		"Content": 
+		[
+			{
+				"Date": "2015-10-29",
+				"Findings": "Doesn't have real meadical data to show",
+				"Remarks": "Make stuff up for now",
+				"Doctor": "Dr. Drake Ramorey",
+				"PRCNumber": "483291"
+			}
+		],
+		"LabResults": [
+		]
+	}
+]

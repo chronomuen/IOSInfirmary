@@ -1,0 +1,29 @@
+ <!-- The page to show a list of audio recordings of the checkup -->
+<ion-view ng-controller="medRecCtrl">
+  <ion-nav-title>
+    Audio Recordings for {{rec.Complaint}}
+  </ion-nav-title>
+	<!-- The user may possibly look at the tutorial -->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear ion-help" ng-click="showTutorial()"></button>
+	</ion-nav-buttons>
+	
+	<ion-content>
+		<div ng-if="recup.Audios.length < 1"> No sounds yet. Why not record a new one? </div>
+		<div ng-if="recup.Audios.length > 0">
+			<ion-list class="card">
+				<ion-item ng-repeat="sound in recup.Audios" ng-click="playRecording($index)" ng-class="($index==selectedIndex) ? 'item item-divider item-stable' : 'item item-divider'">
+					{{sound.date | date : "MM/dd/yyyy h:mma" : "+800"}}
+				</ion-item>
+			</ion-list>
+    </div>
+	</ion-content>
+	<!-- the button for recording -->
+  <button class="button button-fab button-fab-top-right" ng-click="addRecording()" style="top: 80px;">
+    <i class="icon ion-ios-mic-outline"></i>
+  </button>
+	<!-- the button for stopping a playback -->
+	<button class="button button-fab button-fab-bottom-right" ng-click="stopRecording()">
+    <i class="icon ion-stop"></i>
+  </button>
+</ion-view>

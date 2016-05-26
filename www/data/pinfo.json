@@ -1,0 +1,149 @@
+[{
+	"Title": "Important Information",
+	"Content": [{
+		"Label": "Allergic To",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "OPD Number",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Type of Patient",
+		"Value": null,
+		"Type": "select",
+		"Choices": [{
+			"ChoiceName": "Employee"
+		}, {
+			"ChoiceName": "Faculty"
+		}, {
+			"ChoiceName": "Student"
+		}, {
+			"ChoiceName": "Employee Dependent"
+		}, {
+			"ChoiceName": "Faculty Dependent"
+		}, {
+			"ChoiceName": "Retired"
+		}, {
+			"ChoiceName": "Non-UP"
+		}]
+	}, {
+		"Label": "ProfPicPath",
+		"Value": null,
+		"Type": "hidden"
+	}, {
+		"Label": "FirstTime",
+		"Value": "yes",
+		"Type": "hidden"
+	}, {
+		"Label": "Family History",
+		"Value": null,
+		"Type": "textarea"
+	}, {
+		"Label": "Personal History",
+		"Value": null,
+		"Type": "textarea"
+	}]
+}, {
+	"Title": "Basic Info",
+	"Content": [{
+		"Label": "Name",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "Birthday",
+		"Value": null,
+		"Type": "date"
+	}, {
+		"Label": "Sex",
+		"Value": null,
+		"Type": "select",
+		"Choices": [{
+			"ChoiceName": "Male"
+		}, {
+			"ChoiceName": "Female"
+		}]
+	}, {
+		"Label": "Height (cm)",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Weight (kg)",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Civil Status",
+		"Value": null,
+		"Type": "select",
+		"Choices": [{
+			"ChoiceName": "Single"
+		}, {
+			"ChoiceName": "Married"
+		}, {
+			"ChoiceName": "Widowed"
+		}, {
+			"ChoiceName": "Divorced"
+		}]
+	}, {
+		"Label": "Contact Number",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Present Address",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "College or Unit",
+		"Value": null,
+		"Type": "text"
+	}]
+}, {
+	"Title": "Person To Contact (In Case of Emergency)",
+	"Content": [{
+		"Label": "Name",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "Relationship to the Patient",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "Address",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "Office/Dept (UP)",
+		"Value": null,
+		"Type": "text"
+	}, {
+		"Label": "Contact Number",
+		"Value": null,
+		"Type": "number"
+	}]
+}, {
+	"Title": "For female patients",
+	"Content": [{
+		"Label": "Menstruation has begun?",
+		"Value": "No",
+		"Type": "checkbox"
+	}, {
+		"Label": "Age of onset",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Duration (days)",
+		"Value": null,
+		"Type": "number"
+	}, {
+		"Label": "Flow",
+		"Value": null,
+		"Type": "select",
+		"Choices": [{
+			"ChoiceName": "Moderate"
+		}, {
+			"ChoiceName": "Excessive"
+		}, {
+			"ChoiceName": "Scanty"
+		}]
+	}]
+}]

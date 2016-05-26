@@ -1,0 +1,78 @@
+<!-- The modal for editing the personal information of the user -->
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Edit</h1>
+		<!-- so that the user can't exit if first time to input information -->
+    <div class="buttons" ng-if="pInfo[0].Content[4].Value == 'no'">
+      <button class="button button-clear ion-close" ng-click="hideModal()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="padding">
+		<!-- The form is populated with the settings in the pinfo.json (i.e. type, title, value, choices for select) -->
+		<!-- depending on the type, it would behave differently in creating the input -->
+    <form name="$root.pform" id="pform_id">
+			<ion-list ng-repeat="x in form">
+				<div class="card item" ng-if="x.Title != 'For female patients' || (x.Title == 'For female patients' && form[1].Content[2].Value =='Female')">
+					<div class="item item-divider">
+						<b>{{x.Title}}</b>
+					</div>
+					<ion-list ng-repeat="y in x.Content" ng-if="x.Title != 'For female patients'">
+						<div ng-if="y.Type == 'text' || y.Type == 'number' || y.Type == 'date'">
+							<label class="item item-input item-stacked-label">
+								<span class="input-label">{{y.Label}}</span>
+								<input type="{{y.Type}}" ng-model="y.Value" required>
+							</label>
+						</div>
+						<div ng-if="y.Type == 'textarea'">
+							<label class="item item-input item-stacked-label">
+								<span class="input-label">{{y.Label}}</span>
+								<textarea ng-model="y.Value" required></textarea>
+							</label>
+						</div>
+						<div ng-if="y.Type == 'select'">
+							<label class="item item-input item-select">
+								<div class="input-label">{{y.Label}}</div> 
+								<select ng-model="y.Value" required>
+								  <option value="" ng-if="!y.Value">Choose one</option>
+								  <option ng-repeat="option in y.Choices" value="{{option.ChoiceName}}">{{option.ChoiceName}}</option>
+								</select>
+							</label>
+						</div>
+					</ion-list>
+					<!-- Part of the form specific for female patients -->
+					<ion-list ng-if="x.Title == 'For female patients' && form[1].Content[2].Value =='Female'">
+						<ion-checkbox ng-model="x.Content[0].Value" ng-checked="x.Content[0].Value" ng-true-value="'Yes'" ng-false-value="'No'">
+							{{x.Content[0].Label}}
+						</ion-checkbox>
+						<div ng-repeat="y in [x.Content[1], x.Content[2], x.Content[3]]" ng-if="x.Content[0].Value == 'Yes'">
+							<div ng-if="y.Type == 'text' || y.Type == 'number' || y.Type == 'date'">
+								<label class="item item-input item-stacked-label">
+									<span class="input-label">{{y.Label}}</span>
+									<input type="{{y.Type}}" ng-model="y.Value" required>
+								</label>
+							</div>
+							<div ng-if="y.Type == 'textarea'">
+								<label class="item item-input item-stacked-label">
+									<span class="input-label">{{y.Label}}</span>
+									<textarea ng-model="y.Value" required></textarea>
+								</label>
+							</div>
+							<div ng-if="y.Type == 'select'">
+								<label class="item item-input item-select">
+									<div class="input-label">{{y.Label}}</div> 
+									<select ng-model="y.Value" required>
+										<option value="" ng-if="!y.Value">Choose one</option>
+										<option ng-repeat="option in y.Choices" value="{{option.ChoiceName}}">{{option.ChoiceName}}</option>
+									</select>
+								</label>
+							</div>
+						</div>
+					</ion-list>
+				</div>
+			</ion-list>
+    </form>
+  </ion-content>
+	<!-- The form only allows the user to submit once all the fields are valid -->
+  <button form="pform_id" ng-disabled="$root.pform.$invalid" class="button button-fab button-fab-bottom-right icon ion-checkmark" ng-click="saveChanges(form)">
+  </button>
+</ion-modal-view>

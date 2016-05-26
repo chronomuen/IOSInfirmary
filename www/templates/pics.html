@@ -1,0 +1,51 @@
+<!-- The page to show a list of images of the checkup -->
+<ion-view ng-controller="medRecCtrl">
+	<!-- The title would depend on the clicked category beforehand -->
+  <ion-nav-title>
+    {{picsTitle[picType]}} for {{rec.Complaint}}
+  </ion-nav-title>
+	<!-- The user may possibly look at the tutorial -->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear ion-help" ng-click="showTutorial()"></button>
+	</ion-nav-buttons>
+	
+  <ion-content>
+		<!-- the images of the lab orders -->
+		<div ng-if="recup.Pics.LabOrders.length < 1 && picType == 0"> No pictures yet. Why not take a new one? </div>
+		<div ng-if="picType == 0" class="card list" ng-repeat="image in recup.Pics.LabOrders" class="list animate-fade-slide-in-right">
+			<div class="item item-divider">
+				{{image.date | date : "MM/dd/yyyy h:mma" : "+800"}}
+			</div>
+			<div class="item">
+				<img ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb"/>
+			</div>
+		</div>
+		
+		<!-- the images of the lab results-->
+		<div ng-if="recup.Pics.LabResults.length < 1 && picType == 1"> No pictures yet. Why not take a new one? </div>
+		<div ng-if="picType == 1" class="card list" ng-repeat="image in recup.Pics.LabResults" class="list animate-fade-slide-in-right">
+			<div class="item item-divider">
+				{{image.date | date : "MM/dd/yyyy h:mma" : "+800"}}
+			</div>
+			<div class="item">
+				<img ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb"/>
+			</div>
+		</div>
+		
+		<!-- the images of the prescriptions -->
+		<div ng-if="recup.Pics.Prescriptions.length < 1 && picType == 2"> No pictures yet. Why not take a new one? </div>
+		<div ng-if="picType == 2" class="card list" ng-repeat="image in recup.Pics.Prescriptions" class="list animate-fade-slide-in-right">
+			<div class="item item-divider">
+				{{image.date | date : "MM/dd/yyyy h:mma" : "+800"}}
+			</div>
+			<div class="item">
+				<img ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb"/>
+			</div>
+		</div>
+  </ion-content>
+	
+	<!-- the button for taking a picture -->
+  <button class="button button-fab button-fab-top-right" ng-click="addPic(picType)" style="top: 80px;">
+    <i class="icon ion-ios-camera-outline"></i>
+  </button>
+</ion-view>

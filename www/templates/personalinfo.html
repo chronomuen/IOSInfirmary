@@ -1,0 +1,80 @@
+<!-- The page that lists down all the personal information -->
+<ion-view view-title="Personal Info" ng-controller="pInfoCtrl">
+  <ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-compose" ng-click="showModal()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+		<!-- Lists the first set of the informations, separated from the others to layout the profile picture properly -->
+    <ion-list>
+			<div class="card">
+				<div class="item item-divider item-stable">
+					<b>Important Information</b>
+				</div>
+				<ion-list class="list">
+					<div class="item row">
+						<div class="col col-50">
+							<div class="item item-text-wrap row" ng-repeat="y in pInfo[0].Content" ng-if="y.Label != 'FirstTime'">
+								<div class="col col-25" ng-if="y.Label != 'ProfPicPath'">
+									{{y.Label}}
+								</div>
+								<div class="col col-75" ng-if="y.Label != 'ProfPicPath'">
+									{{y.Value}}
+								</div>
+							</div>
+						</div>
+						<div class="col col-50" style="overflow: auto;">
+							<img ng-src="{{pInfo[0].Content[3].Value}}" class="image-list-thumb" style="float: right; height: 300px;"/>
+						</div>
+					</div>
+				</ion-list>
+			</div>
+    </ion-list>
+		<!-- Lists the other personal information -->
+    <ion-list ng-repeat="x in [pInfo[1], pInfo[2]]">
+			<div class="card">
+				<div class="item item-divider item-stable">
+					<b>{{x.Title}}</b>
+				</div>
+				<ion-list ng-repeat="y in x.Content" class="list">
+					<div class="item item-text-wrap row">
+						<div class="col col-25">
+							{{y.Label}}
+						</div>
+						<div class="col col-75" ng-if="y.Type != 'date'">
+							{{y.Value}}
+						</div>
+						<div class="col col-75" ng-if="y.Type == 'date'">
+							{{y.Value | date : "MM/dd/yyyy" : "+800"}}
+						</div>
+					</div>
+				</ion-list>
+			</div>
+    </ion-list>
+		<!-- Lists the personal information important for female patients -->
+    <ion-list ng-init="x = pInfo[3]" ng-if="pInfo[1].Content[2].Value == 'Female'">
+			<div class="card">
+				<div class="item item-divider item-stable">
+					<b>{{x.Title}}</b>
+				</div>
+				<ion-list class="list">
+					<div class="item item-text-wrap row">
+						<div class="col col-25">
+							{{x.Content[0].Label}}
+						</div>
+						<div class="col col-75">
+							{{x.Content[0].Value}}
+						</div>
+					</div>
+					<div class="item item-text-wrap row" ng-repeat="y in [x.Content[1], x.Content[2], x.Content[3]]" ng-if="x.Content[0].Value == 'Yes'">
+						<div class="col col-25">
+							{{y.Label}}
+						</div>
+						<div class="col col-75">
+							{{y.Value}}
+						</div>
+					</div>
+				</ion-list>
+			</div>
+    </ion-list>
+  </ion-content>
+</ion-view>

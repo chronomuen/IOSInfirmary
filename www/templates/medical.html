@@ -1,0 +1,75 @@
+<!-- The main view of the application -->
+<ion-view view-title="Medical Records" ng-controller="medicalCtrl">
+	<!-- The button for the tutorial -->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear ion-help" ng-click="showTutorial()"></button>
+	</ion-nav-buttons>
+	
+  <ion-content class="scroll-content ionic-scroll has-header logoImage">
+		<!-- This shows a banner that lists a few personal info and an option to show more -->
+		<div class="pInfo">
+			<div class="hero" style="background-image:url(img/nature.jpg)">
+				<div class="content">
+					<!-- shows the picture and the way to replace it -->
+					<div class="avatar" ng-if="pInfo[0].Content[3].Value" style="border: 1px solid white; background-image: url('{{pInfo[0].Content[3].Value}}');" ng-click="takePic()"></div>					
+					<!-- if there is no profile picture, it would show a default image -->
+					<div class="avatar" ng-if="!pInfo[0].Content[3].Value" style="border: 1px solid white; background-image:url(img/temppic.png);" ng-click="takePic()"></div>
+					<!-- shows the basic information -->
+					<ion-list>
+						<ion-item class="item item-text-wrap row">
+							<div class="col col-40">Name: {{basic[0].Value}}</div>
+							<div class="col col-25">OPD#: {{basic[1].Value}}</div>
+							<div class="col col-25">Type of Patient: {{basic[2].Value}}</div>
+							<div class="col col-10">Age: {{basic[3].Value}}</div>
+						</ion-item>
+						<ion-item class="item item-text-wrap row">
+							<div class="col col-40">Person To Contact: {{basic[4].Value}}</div>
+							<div class="col col-40">Contact Number: {{basic[5].Value}}</div>
+							<div class="col col-20 text-right">
+								<button class="button button-small button-clear button-positive" ng-click="showInfo()">
+									more info
+								</button>
+							</div>
+						</ion-item>
+					</ion-list>
+				</div>
+			</div>
+		</div>
+		
+		<!-- shows the top part of the list of complaints, with the filter and the add complaint functionality -->
+		<div class="row">
+			<div class="col col-50 padding">
+				<h3>List of Complaints</h3>
+			</div>
+			<div class="col col-40 padding">
+				<input ng-model="searchText">
+				<i class="icon ion-ios-search-strong"></i>
+			</div>
+			<div class="col col-10">
+				<button class="button button-positive button-clear" ng-click="addRecord()">
+					<i class="icon ion-plus"></i>
+				</button>
+			</div>
+		</div>
+		
+		<!-- This lists the complaints with its details chronologically -->
+		<ion-list>
+			<ion-item class="card" ng-repeat="rec in medRec | filter:searchText | orderBy:'LastModified':true" href="#/app/medical/{{rec.id}}">
+				<div class="item item-divider">
+					Name of complaint: {{rec.Complaint}}
+				</div>
+				<div class="item row">
+					<div class="col col-50">
+						<h3>Date created:</h3><br>{{rec.DateCreated | date : "MM/dd/yyyy h:mma" : "+800"}}
+					</div>
+					<div class="col col-50">
+						<h3>Last doctor checked up with:</h3><br>{{rec.LastDoctor}}
+					</div>
+				</div>
+			</ion-item>
+	  </ion-list>
+  </ion-content>
+	
+	<!-- The button to quickly scroll to the top of the page -->
+	<button class="button button-fab button-fab-bottom-right button-clear icon ion-ios-arrow-up" ng-click="gotoTop()"></button>
+</ion-view>

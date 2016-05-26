@@ -1,0 +1,44 @@
+<!-- The modal for updating the doctor's observations -->
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Update Doctor's Observations</h1>
+    <div class="buttons">
+      <button class="button button-clear ion-close" ng-click="hideDocUpdate()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="padding">
+		<!-- All fields in the form are required to enable the submit button -->
+    <form ng-model="doc" name="eform">
+	  <div class="padding">
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Diagnosis</span>
+				<textarea ng-model="doc.Diagnosis" required></textarea>
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Findings</span>
+				<textarea ng-model="doc.Findings" required></textarea>
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Remarks</span>
+				<textarea ng-Model="doc.Remarks" required></textarea>
+			</label>
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Doctor
+				</div>
+				<select ng-model="doc.Doctor" required>
+					<option value="">Choose one</option>
+					<option ng-repeat="doctor in doctors" value="{{doctor}}">{{doctor}}</option>
+				</select>
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">PRC Number</span>
+				<textarea ng-Model="doc.PRC" required></textarea>
+			</label>
+	  </div>
+	  <div class="padding">
+			<button type="submit" ng-disabled="eform.$invalid" class="button button-full button-positive" ng-click="doDocUpdate(doc)">Update</button>
+		</div>
+	</form>
+  </ion-content>
+</ion-modal-view>

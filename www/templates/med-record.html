@@ -1,0 +1,116 @@
+<!-- The page for viewing the specific complaint -->
+<ion-view ng-controller="medRecCtrl">
+	<!-- The title would depend on which complaint was selected -->
+  <ion-nav-title>
+    {{rec.Complaint}}
+  </ion-nav-title>
+	<!-- The button for the tutorial -->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear ion-help" ng-click="showTutorial()"></button>
+	</ion-nav-buttons>
+	<!-- This shows a banner for some basic information about the user and an option to show more -->
+  <ion-content>
+		<div class='pInfo' ng-controller='pInfoCtrl'>
+			<div class="hero" style="background-image:url(img/nature.jpg)">
+				<div class="content">
+					<div class="avatar" ng-if="pInfo[0].Content[3].Value" style="border: 1px solid white; background-image: url('{{pInfo[0].Content[3].Value}}');" ng-click="takePic()"></div>		
+					<div class="avatar" ng-if="!pInfo[0].Content[3].Value" style="border: 1px solid white; background-image:url(img/temppic.png);" ng-click="takePic()"></div>
+					<ion-list>
+						<ion-item class="item item-text-wrap row">
+							<div class="col col-40">Name: {{basic[0].Value}}</div>
+							<div class="col col-25">OPD#: {{basic[1].Value}}</div>
+							<div class="col col-25">Type of Patient: {{basic[2].Value}}</div>
+							<div class="col col-10">Age: {{basic[3].Value}}</div>
+						</ion-item>
+						<ion-item class="item item-text-wrap row">
+							<div class="col col-40">Person To Contact: {{basic[4].Value}}</div>
+							<div class="col col-40">Contact Number: {{basic[5].Value}}</div>
+							<div class="col col-20 text-right">
+								<button class="button button-small button-clear button-positive" ng-click="showInfo()">
+									more info
+								</button>
+							</div>
+						</ion-item>
+					</ion-list>
+				</div>
+			</div>
+		</div>
+		
+		<!-- shows the top of the list of checkups, with the filter bar, and the add checkup button -->
+		<div class="row">
+			<div class="col col-50 padding">
+				<h3>List of Checkups</h3>
+			</div>
+			<div class="col col-40 padding">
+				<input ng-model="searchText">
+				<i class="icon ion-ios-search-strong"></i>
+			</div>
+			<div class="col col-10">
+				<button class="button button-positive button-clear" ng-click="showUpdate()">
+					<i class="icon ion-plus"></i>
+				</button>
+			</div>
+		</div>
+		
+		<!-- Lists the checkups and its details, the triage info and the doctor's observations, with buttons to redirect to specific picture categories, chronologically  -->
+		<ion-list class="item card-item" ng-repeat="x in rec.Content | filter:searchText| orderBy:'Date':true">
+			<div class="card">
+				<!-- Checkup header -->
+				<div class="item-divider item row">
+                    <div class="col col-66"><h2><b>{{x.Date | date : "MM/dd/yyyy h:mma" : "+800"}}</b></h2></div>
+                    <div class="col col-33 button button-positive button-full" style="float: right;" ng-click="showAudios(x.Date)">Recordings({{x.Audios.length}})</div>
+                </div>
+				<div class="item item-text-wrap row">
+					<div class="col col-33 button button-positive button-full" ng-click="showPics(x.Date,0)">Lab Orders({{x.Pics.LabOrders.length}})</div>
+					<div class="col col-33 button button-positive button-full" ng-click="showPics(x.Date,1)">Lab Results({{x.Pics.LabResults.length}})</div>
+					<div class="col col-33 button button-positive button-full" ng-click="showPics(x.Date,2)">Prescriptions({{x.Pics.Prescriptions.length}})</div>
+				</div>
+				<!-- The triage info -->
+				<div class="item item-divider item-stable">Triage Info</div>
+				<div class="item row">
+					<div class="col col-20">
+						<h3>BP:</h3> <p>{{x.Systolic}}/{{x.Diastolic}}</p>
+					</div>
+					<div class="col col-30">
+						<h3>Temperature:</h3> <p>{{x.Temperature}} degrees Celsius</p>
+					</div>
+					<div class="col col-50">
+						<h3>Nurse:</h3> <p>{{x.Nurse}}</p>
+					</div>
+				</div>
+				<!-- Some details of the history of the present illness -->
+				<div class="item item-divider item-stable">History of Present Illness</div>
+				<div>
+					<div class="item">
+						<h3>Start of Symptoms:</h3> <p>{{x.Symptomsdate | date : "MM/dd/yyyy" : "+800"}}</p>
+					</div>
+					<div class="item">
+						<h3>Prior medications:</h3> <p>{{x.Medications}}</p>
+					</div>
+				</div>
+				<!-- The doctor's observations -->
+				<div class="item item-divider item-stable">Doctor's Observations
+					<div class="button button-small button-positive" style="float: right; vertical-align: middle;" ng-click="showDocUpdate(x.Date)">Update
+					</div>
+				</div>
+				<div>
+					<div class="item">
+						<h3>Diagnosis:</h3> <p>{{x.Diagnosis}}</p>
+					</div>
+					<div class="item">
+						<h3>Findings:</h3> <p>{{x.Findings}}</p>
+					</div>
+					<div class="item">
+						<h3>Remarks:</h3> <p>{{x.Remarks}}</p>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Dr. {{x.Doctor}}</h3>
+				</div>
+			</div>
+		</ion-list>
+  </ion-content>
+	
+	<!-- The button for quickly scrolling to the top of the page -->
+	<button class="button button-fab button-fab-bottom-right button-clear icon ion-ios-arrow-up" ng-click="gotoTop()"></button>
+</ion-view>

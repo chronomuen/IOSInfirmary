@@ -1,0 +1,24 @@
+<!-- The modal for the tutorial -->
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Tutorial</h1>
+		<div class="buttons">
+      <button class="button button-clear ion-close" ng-click="hideTutorial()"></button>
+    </div>
+  </ion-header-bar>
+	<ion-content scroll="false" style="background-color: rgb(0, 103, 162);">
+		<ion-slide-box on-slide-changed="slideHasChanged($index)">
+			<!-- shows all the images except the last -->
+			<ion-slide ng-repeat="n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+				<div class="tutorial center" style="background-image: url('img/tutorials/page {{n}}.jpg');"></div>
+			</ion-slide>
+			<!-- will show the last image (with a 'take a picture' button) if tutorial for the first time -->
+			<ion-slide ng-if="pInfo[0].Content[4].Value == 'yes'">
+				<div class="tutorial" style="background-image: url('img/tutorials/page 16.jpg');"></div>
+				<div class="center">
+					<button class="button button-positive button-raised" ng-click="firstPic()">take first pic</button>
+				</div>
+			</ion-slide>
+		</ion-slide-box>
+	</ion-content>
+</ion-modal-view>

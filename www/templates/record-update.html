@@ -1,0 +1,84 @@
+<!-- The modal for adding a checkup -->
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">New Update</h1>
+    <div class="buttons">
+      <button class="button button-clear ion-close" ng-click="hideUpdate()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <form ng-model="entry" name="eform">
+		<!-- The part of the form for the triage info (required) -->
+	  <div class="padding">
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Blood Pressure</span>
+				<label class="item item-input">
+					<span class="input-label">Systolic</span>
+					<input type="number" ng-model="entry.Systolic" min="60" max="400" required></input>
+				</label>
+				<label class="item item-input">
+					<span class="input-label">Diastolic</span>
+					<input type="number" ng-model="entry.Diastolic" min="40" max="300" required></input>
+				</label>
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Temperature (Celsius)</span>
+				<input type="number" ng-model="entry.Temperature" min="30" max="45" required></input>
+			</label>
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Nurse
+				</div>
+				<select ng-model="entry.Nurse" required>
+					<option value="">Choose one</option>
+					<option ng-repeat="nurse in nurses" value="{{nurse}}">{{nurse}}</option>
+				</select>
+			</label>
+	  </div>
+		<!-- The part of the form for the history of the present illness (required) -->
+		<div class="padding">
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">Date the symptoms first appeared</span>
+					<input type="date" ng-model="entry.Symptomsdate" required>
+			</label>
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">Prior medications taken</span>
+					<textarea ng-model="entry.Medications" required></textarea>
+			</label>
+		</div>
+		<!-- The submit button that divides the required and the non-required fields -->
+	  <div class="padding">
+			<button type="submit" ng-disabled="eform.$invalid" class="button button-full button-positive" ng-click="updateEntry(entry)">Create</button>
+		</div>
+		
+		<!-- The part of the form for the doctor's observations (not required) -->
+		<div class="padding">
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">Diagnosis</span>
+					<textarea ng-model="entry.Diagnosis"></textarea>
+			</label>
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">Findings</span>
+					<textarea ng-model="entry.Findings"></textarea>
+			</label>
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">Remarks</span>
+					<textarea ng-Model="entry.Remarks"></textarea>
+			</label>
+			<label class="item item-input item-select">
+					<div class="input-label">
+							Doctor
+					</div>
+					<select ng-model="entry.Doctor">
+							<option value="">Choose one</option>
+							<option ng-repeat="doctor in doctors" value="{{doctor}}">{{doctor}}</option>
+					</select>
+			</label>
+			<label class="item item-input item-stacked-label">
+					<span class="input-label">PRC Number</span>
+					<textarea ng-Model="entry.PRC"></textarea>
+			</label>
+		</div>
+	</form>
+  </ion-content>
+</ion-modal-view>
